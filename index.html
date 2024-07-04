@@ -7,30 +7,81 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Weather Radar and Lightning Tracker</h1>
-    <p>Below is the live weather radar and lightning tracker from Windy.com:</p>
-    
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Weather Radar and Lightning Tracker</h1>
+        <p>Get live updates on weather radar and lightning strikes from Windy.com.</p>
+    </div>
+
+    <!-- Loader -->
     <div id="loader"></div>
+
+    <!-- Weather Map Container -->
     <div id="iframe-container">
         <iframe 
             id="weatherMap"
             src="https://embed.windy.com/embed2.html?lat=38.580&lon=23.621&detailLat=38.580&detailLon=23.621&width=650&height=450&zoom=8&level=surface&overlay=radar&product=radar&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1">
         </iframe>
     </div>
-    <button id="fullscreenButton">Fullscreen</button>
     
-    <!-- Weather Icon Example -->
+    <!-- Fullscreen Button -->
+    <button id="fullscreenButton">Fullscreen</button>
+
+    <!-- Weather Icons -->
     <div id="weather-icons">
         <img src="sunny-icon.png" alt="Sunny" class="weather-icon">
         <img src="rainy-icon.png" alt="Rainy" class="weather-icon">
         <img src="storm-icon.png" alt="Storm" class="weather-icon">
     </div>
-    
+
+    <!-- Popup Ad -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <button class="popup-close" id="popupClose">&times;</button>
+            <img id="popupImage" class="popup-image" src="" alt="Popup Image">
+            <div class="popup-title">Check out islands by thanasisyama!</div>
+            <div class="popup-description">Discover incredible islands in Fortnite created by <strong>thanasisyama</strong>.</div>
+            <a href="https://www.fortnite.com/@thanasisyama" target="_blank" class="popup-link">Visit Now</a>
+        </div>
+    </div>
+
+    <!-- Script for Popup and Weather Map Handling -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const iframe = document.getElementById('weatherMap');
             const loader = document.getElementById('loader');
             const fullscreenButton = document.getElementById('fullscreenButton');
+            const popupOverlay = document.getElementById('popupOverlay');
+            const popupClose = document.getElementById('popupClose');
+            const popupImage = document.getElementById('popupImage');
+
+            // Image URLs
+            const imageUrls = [
+                'https://cdn-0001.qstv.on.epicgames.com/BqtJetqiIDQJGIzTpi/image/landscape_comp.jpeg',
+                'https://cdn-0001.qstv.on.epicgames.com/qTJKxlCOMnCuMNqGaX/image/landscape_comp.jpeg',
+                'https://cdn-0001.qstv.on.epicgames.com/WoAhooQSuNCWBJqpfM/image/landscape_comp.jpeg'
+            ];
+
+            // Show popup ad with a delay
+            setTimeout(function() {
+                // Set a random image from the list
+                const randomIndex = Math.floor(Math.random() * imageUrls.length);
+                popupImage.src = imageUrls[randomIndex];
+                
+                popupOverlay.style.display = 'block';
+            }, 8000); // Show popup after 8 seconds to avoid immediate disruption
+
+            // Close popup ad
+            popupClose.addEventListener('click', function() {
+                popupOverlay.style.display = 'none';
+            });
+            
+            // Close popup when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === popupOverlay) {
+                    popupOverlay.style.display = 'none';
+                }
+            });
 
             iframe.onload = function() {
                 loader.classList.add('hidden');
