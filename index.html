@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Radar and Lightning Tracker</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Favicon Link -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <!-- Hero Section -->
@@ -24,10 +26,8 @@
         </iframe>
     </div>
     
-    <!-- Fullscreen Button -->
+    <!-- Fullscreen and Exit Fullscreen Buttons -->
     <button id="fullscreenButton">Fullscreen</button>
-
-    <!-- Exit Fullscreen Button (Mobile Only) -->
     <button id="exitFullscreenButton" class="hidden">Exit Fullscreen</button>
 
     <!-- Weather Icons -->
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <!-- Script for Popup, Weather Map Handling, and Fullscreen Toggle -->
+    <!-- Script for Popup and Weather Map Handling -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const iframe = document.getElementById('weatherMap');
@@ -87,7 +87,6 @@
                 }
             });
 
-            // Handle iframe loading
             iframe.onload = function() {
                 loader.classList.add('hidden');
                 iframe.style.display = 'block';
@@ -103,7 +102,6 @@
                 }
             }, 10000); // 10 seconds timeout as a fallback
 
-            // Fullscreen Button Event
             fullscreenButton.addEventListener('click', function() {
                 if (iframe.requestFullscreen) {
                     iframe.requestFullscreen();
@@ -114,57 +112,40 @@
                 } else if (iframe.msRequestFullscreen) { // IE/Edge
                     iframe.msRequestFullscreen();
                 }
+
+                fullscreenButton.classList.add('hidden');
+                exitFullscreenButton.classList.remove('hidden');
             });
 
-            // Exit Fullscreen Button Event (Mobile Only)
             exitFullscreenButton.addEventListener('click', function() {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) { // Safari
-                    document.webkitExitFullscreen();
                 } else if (document.mozCancelFullScreen) { // Firefox
                     document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { // Chrome, Safari, and Opera
+                    document.webkitExitFullscreen();
                 } else if (document.msExitFullscreen) { // IE/Edge
                     document.msExitFullscreen();
                 }
-            });
 
-            // Display or hide exit fullscreen button based on fullscreen mode
-            document.addEventListener('fullscreenchange', function() {
-                if (document.fullscreenElement) {
-                    exitFullscreenButton.classList.remove('hidden');
-                } else {
-                    exitFullscreenButton.classList.add('hidden');
-                }
-            });
-
-            document.addEventListener('webkitfullscreenchange', function() {
-                if (document.webkitFullscreenElement) {
-                    exitFullscreenButton.classList.remove('hidden');
-                } else {
-                    exitFullscreenButton.classList.add('hidden');
-                }
-            });
-
-            document.addEventListener('mozfullscreenchange', function() {
-                if (document.mozFullScreenElement) {
-                    exitFullscreenButton.classList.remove('hidden');
-                } else {
-                    exitFullscreenButton.classList.add('hidden');
-                }
-            });
-
-            document.addEventListener('msfullscreenchange', function() {
-                if (document.msFullscreenElement) {
-                    exitFullscreenButton.classList.remove('hidden');
-                } else {
-                    exitFullscreenButton.classList.add('hidden');
-                }
-            });
-
-            // Hide the exit fullscreen button by default on non-mobile devices
-            if (window.innerWidth > 768) {
                 exitFullscreenButton.classList.add('hidden');
+                fullscreenButton.classList.remove('hidden');
+            });
+
+            // Handle fullscreen change events
+            document.addEventListener('fullscreenchange', updateFullscreenButtons);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButtons);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButtons);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButtons);
+
+            function updateFullscreenButtons() {
+                if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+                    fullscreenButton.classList.add('hidden');
+                    exitFullscreenButton.classList.remove('hidden');
+                } else {
+                    fullscreenButton.classList.remove('hidden');
+                    exitFullscreenButton.classList.add('hidden');
+                }
             }
         });
     </script>
