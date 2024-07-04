@@ -1,7 +1,7 @@
 /* General Styles */
 body {
-    font-family: 'Roboto', sans-serif; /* Custom font */
-    background: linear-gradient(135deg, #a2c2e2, #e2a2a2); /* Gradient background */
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #a2c2e2, #e2a2a2);
     color: #fff;
     margin: 0;
     padding: 0;
@@ -14,7 +14,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: url('hero-background.jpg') no-repeat center center/cover; /* Hero background image */
+    background: url('hero-background.jpg') no-repeat center center/cover;
     color: #fff;
     padding: 80px 20px;
     text-align: center;
@@ -73,7 +73,7 @@ body {
     margin: 20px auto;
     border-radius: 15px;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    background: rgba(0, 0, 0, 0.6);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     animation: fadeInUp 2s ease-in-out 1s;
 }
@@ -95,7 +95,7 @@ body {
     padding: 12px 25px;
     font-size: 1.1em;
     cursor: pointer;
-    border-radius: 25px; /* Rounded button */
+    border-radius: 25px;
     margin-top: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
@@ -117,6 +117,13 @@ body {
     height: 100%;
     background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background */
     z-index: 1000; /* Make sure it sits on top of everything */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.popup-overlay.show {
+    display: block;
+    opacity: 1;
 }
 
 .popup-content {
@@ -131,7 +138,7 @@ body {
     width: 90%;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
     text-align: center;
-    animation: fadeInUp 1s ease-in-out; /* Fade-in animation for the popup */
+    animation: fadeInUp 1s ease-in-out;
 }
 
 .popup-title {
