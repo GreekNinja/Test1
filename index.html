@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <!-- Hero Section -->
     <div class="hero">
         <h1>Weather Radar and Lightning Tracker</h1>
         <p>Get live updates on weather radar and lightning strikes from Windy.com.</p>
@@ -27,6 +27,9 @@
     <!-- Fullscreen Button -->
     <button id="fullscreenButton">Fullscreen</button>
 
+    <!-- Exit Fullscreen Button (Mobile Only) -->
+    <button id="exitFullscreenButton" class="hidden">Exit Fullscreen</button>
+
     <!-- Weather Icons -->
     <div id="weather-icons">
         <img src="sunny-icon.png" alt="Sunny" class="weather-icon">
@@ -45,12 +48,13 @@
         </div>
     </div>
 
-    <!-- Script for Popup and Weather Map Handling -->
+    <!-- Script for Popup, Weather Map Handling, and Fullscreen Toggle -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const iframe = document.getElementById('weatherMap');
             const loader = document.getElementById('loader');
             const fullscreenButton = document.getElementById('fullscreenButton');
+            const exitFullscreenButton = document.getElementById('exitFullscreenButton');
             const popupOverlay = document.getElementById('popupOverlay');
             const popupClose = document.getElementById('popupClose');
             const popupImage = document.getElementById('popupImage');
@@ -83,6 +87,7 @@
                 }
             });
 
+            // Handle iframe loading
             iframe.onload = function() {
                 loader.classList.add('hidden');
                 iframe.style.display = 'block';
@@ -98,6 +103,7 @@
                 }
             }, 10000); // 10 seconds timeout as a fallback
 
+            // Fullscreen Button Event
             fullscreenButton.addEventListener('click', function() {
                 if (iframe.requestFullscreen) {
                     iframe.requestFullscreen();
@@ -109,6 +115,57 @@
                     iframe.msRequestFullscreen();
                 }
             });
+
+            // Exit Fullscreen Button Event (Mobile Only)
+            exitFullscreenButton.addEventListener('click', function() {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { // Safari
+                    document.webkitExitFullscreen();
+                } else if (document.mozCancelFullScreen) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.msExitFullscreen) { // IE/Edge
+                    document.msExitFullscreen();
+                }
+            });
+
+            // Display or hide exit fullscreen button based on fullscreen mode
+            document.addEventListener('fullscreenchange', function() {
+                if (document.fullscreenElement) {
+                    exitFullscreenButton.classList.remove('hidden');
+                } else {
+                    exitFullscreenButton.classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('webkitfullscreenchange', function() {
+                if (document.webkitFullscreenElement) {
+                    exitFullscreenButton.classList.remove('hidden');
+                } else {
+                    exitFullscreenButton.classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('mozfullscreenchange', function() {
+                if (document.mozFullScreenElement) {
+                    exitFullscreenButton.classList.remove('hidden');
+                } else {
+                    exitFullscreenButton.classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('msfullscreenchange', function() {
+                if (document.msFullscreenElement) {
+                    exitFullscreenButton.classList.remove('hidden');
+                } else {
+                    exitFullscreenButton.classList.add('hidden');
+                }
+            });
+
+            // Hide the exit fullscreen button by default on non-mobile devices
+            if (window.innerWidth > 768) {
+                exitFullscreenButton.classList.add('hidden');
+            }
         });
     </script>
 </body>
