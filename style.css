@@ -12,20 +12,25 @@ body {
 /* Custom Font Import */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-/* Header Styles */
-h1 {
-    font-size: 3em;
-    color: #ffffff;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    margin-top: 20px;
+/* Hero Section */
+.hero {
+    background: url('hero-background.jpg') no-repeat center center/cover; /* Hero background image */
+    color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    margin: 0;
     animation: fadeInUp 2s ease-in-out;
 }
 
-/* Paragraph Styles */
-p {
-    font-size: 1.2em;
-    color: #f1f1f1;
-    margin: 20px;
+.hero p {
+    font-size: 1.3em;
+    margin: 20px 0;
     line-height: 1.6;
     animation: fadeInUp 2s ease-in-out 0.5s;
 }
@@ -35,10 +40,10 @@ p {
     width: 80px;
     height: 80px;
     border: 8px solid rgba(255, 255, 255, 0.2);
-    border-top: 8px solid #ffffff;
+    border-top: 8px solid #ffcc00;
     border-radius: 50%;
     animation: spin 1.2s linear infinite;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 /* Keyframes for spinner animation */
@@ -84,7 +89,7 @@ p {
 
 /* Fullscreen Button Styles */
 #fullscreenButton {
-    background-color: #ffffff;
+    background-color: #ffcc00;
     color: #000;
     border: none;
     padding: 12px 25px;
@@ -93,22 +98,107 @@ p {
     border-radius: 25px; /* Rounded button */
     margin-top: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
 #fullscreenButton:hover {
-    background-color: #f0f0f0;
+    background-color: #ffaa00;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+/* Popup Ad Styles */
+.popup-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background */
+    z-index: 1000; /* Make sure it sits on top of everything */
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #111; /* Dark background for popup */
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: fadeInUp 1s ease-in-out; /* Fade-in animation for the popup */
+}
+
+.popup-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ff00ff; /* Neon pink */
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+}
+
+.popup-description {
+    font-size: 1.3em;
+    color: #00ffff; /* Neon cyan */
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.popup-link {
+    font-size: 1.2em;
+    color: #ffcc00; /* Neon yellow */
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+}
+
+.popup-link:hover {
+    color: #ffaa00; /* Hover color for the link */
+}
+
+.popup-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1.2em;
+    line-height: 30px;
+    text-align: center;
+    z-index: 1001; /* Ensure close button is on top */
+}
+
+.popup-close:hover {
+    background: #333;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    h1 {
+    .hero h1 {
         font-size: 2.5em;
     }
 
-    p {
-        font-size: 1em;
+    .hero p {
+        font-size: 1.1em;
     }
 }
 
