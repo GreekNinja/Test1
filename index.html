@@ -68,18 +68,18 @@
                 const randomIndex = Math.floor(Math.random() * imageUrls.length);
                 popupImage.src = imageUrls[randomIndex];
                 
-                popupOverlay.style.display = 'block';
+                popupOverlay.classList.add('show');
             }, 8000); // Show popup after 8 seconds to avoid immediate disruption
 
             // Close popup ad
             popupClose.addEventListener('click', function() {
-                popupOverlay.style.display = 'none';
+                popupOverlay.classList.remove('show');
             });
             
             // Close popup when clicking outside
             window.addEventListener('click', function(event) {
                 if (event.target === popupOverlay) {
-                    popupOverlay.style.display = 'none';
+                    popupOverlay.classList.remove('show');
                 }
             });
 
